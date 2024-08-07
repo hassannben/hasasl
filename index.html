@@ -3,8 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>store</title>
+  <meta name="description" content="احصل على عرض خاص لشراء حامل مغناطيسي وشاحن لاسلكي مميز للهواتف الذكية في السيارة. شحن سريع وبسعر مميز!">
+  <title>عرض خاص</title>
   <style>
+    /* إضافة CSS هنا */
     body {
       font-family: Arial, sans-serif;
       margin: 0;
@@ -15,6 +17,9 @@
     }
     h2, h3 {
       color: #333;
+    }
+    h1 {
+        background-color: #ddd;
     }
     form {
       background-color: #fff;
@@ -67,13 +72,21 @@
       opacity: 1;
       transform: translateY(0);
     }
-    .product-images img {
-      max-width: 100%;
-      border-radius: 5px;
-      transition: transform 0.3s ease-in-out;
+    .product-images {
+      position: relative;
+      height: 500px;
+      left:  120px;
+      overflow: hidden;
     }
-    .product-images img:hover {
-      transform: scale(1.05);
+    .product-images img {
+      position: absolute;
+      height: 300px;
+    
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+    .product-images img.active {
+      opacity: 1;
     }
     input:focus, select:focus, textarea:focus {
       border-color: #4CAF50;
@@ -101,6 +114,7 @@
     }
   </style>
   <script>
+    // إضافة JavaScript هنا
     window.onload = function() {
       var now = new Date();
       var todayDate = now.toISOString().split('T')[0];
@@ -121,18 +135,31 @@
       updateTotal();
 
       document.querySelector('.product-container').classList.add('fade-in-active');
+      
+      // إعداد صور التغيير الدوري
+      var images = document.querySelectorAll('.product-images img');
+      var currentIndex = 0;
+
+      function showNextImage() {
+        images[currentIndex].classList.remove('active');
+        currentIndex = (currentIndex + 1) % images.length;
+        images[currentIndex].classList.add('active');
+      }
+
+      images[currentIndex].classList.add('active');
+      setInterval(showNextImage, 3000); // تغيير الصورة كل 3 ثوانٍ
     };
 
     function updateDeliveryCost() {
       var city = document.getElementById('city').value;
-      var deliveryCost = (city === 'الجزائر') ? 500 : 700;
+      var deliveryCost = (city === 'الجزائر') ? 400 : 700;
       document.getElementById('deliveryCost').value = deliveryCost;
 
       updateTotal();
     }
 
     function updateTotal() {
-      var productPrice = 1500;
+      var productPrice = 1300;
       var quantity = parseInt(document.getElementById('quantity').value) || 0;
       var deliveryCost = parseFloat(document.getElementById('deliveryCost').value) || 0;
       var total = (productPrice * quantity) + deliveryCost;
@@ -171,34 +198,35 @@
       });
     }
   </script>
-
- 
-  <meta property="og:title" content="احصل على المنتج بسعر مميز - تسوق الآن">
-<meta property="og:description" content="احصل على المنتج الذي تريده بسعر مميز مع توصيل سريع. لا تفوت الفرصة!">
-
-<meta property="og:video" content="https://www.assosoutlet.com/media/catalog/product/A/S/ASSOS_41.20.234.18_01_unq227.mp4">
-<meta property="og:video:type" content="video/mp4">
-<meta property="og:video:width" content="1200">
-<meta property="og:video:height" content="675">
-<meta property="og:url" content="https://hassannben.github.io/hasasl/">
-<meta property="og:type" content="video.other"> <!-- أو "video.other" بدلاً من "website" -->
-<meta name="twitter:card" content="player">
-<meta name="twitter:player" content="https://www.assosoutlet.com/media/catalog/product/A/S/ASSOS_41.20.234.18_01_unq227.mp4">
-<meta name="twitter:player:width" content="1200">
-<meta name="twitter:player:height" content="675">
-
-
-
+  <meta property="og:title" content="عرض خاص - شراء الآن">
+  <meta property="og:description" content="استفد من العرض الخاص الآن! احصل على المنتج الذي تريده بسعر مميز وتوصيل سريع.">
+  <meta property="og:image" content="https://pro.safir.click/images/thumbnails/449/449/detailed/326/Wireless-Charger-Car-Kit-3-e1564403929569.jpg">
+  <meta property="og:url" content="https://hassannben.github.io/hasasl/">
+  <meta property="og:type" content="website">
 </head>
 <body>
   <div class="product-container">
     <div class="product-images">
-      <img src="images/imagesss.png" alt="صورة المنتج 1" />
-      <img src="images/t-shirt.png" alt="صورة المنتج 2" />
+      <img src="images/Wireless-ChargeR.jpg" alt="صورة المنتج 1" />
+      <img src="images/Wireless-Charger-C.jpg" alt="صورة المنتج 2" />
+      <img src="images/Wireless-Charger-Ca.jpg" alt="صورة المنتج 3" />
+      <img src="images/Wireless-Charger-Car.jpg" alt="صورة المنتج 4" />
     </div>
     <div class="product-description">
       <h3>وصف المنتج</h3>
-      <p>هذا هو وصف المنتج. يمكنك إضافة مزيد من المعلومات هنا حول المنتج وما يقدمه.</p>
+      <h3>حامل مغناطيسي و شاحن لاسلكي مميز للهواتف الذكية في السيارة بتقنية الشحن السريع WIRELESS CHARGER CAR KIT W3 [CLONE]</h3>
+      <br>
+      <h1 style="color: #45a049;">1300 دج</h1>
+      <br>
+      <p>
+        حامل مغناطيسي و شاحن لاسلكي لهاتفك الذكي 2في1، مناسب للإستعمال في السيارة سواءا عن طريق كابل للشحن أو عن طريق ميزة الشحن اللاسلكي، متوافق مع هواتف السامسونغ، الأيفون و كل الهواتف الذكية التي تدعم تقنية الشحن اللاسلكي. حامل مغناطيسي مثبت بطريقة مميزة قابل لتعديل الوضعية بدرجة دوران 360، لتيتح لك تثبيت هاتفك في الوضعية المناسبة لك.
+        <br><br>
+        ميزة الشحن السريع تعمل مع كل الهواتف الذكية التي تدعم هذه التقنية.
+        حامل هواتف و شاحن لاسلكي في نفس الوقت، يمكنك من شحن الهاتف و استعمال وظائف الملاحة في نفس الوقت.
+        2 في 1 يمكن الشحن عن طريق كابل الشحن بمنفذين USB أو عن طريق الشحن اللاسلكي.
+        شحن بقوة 2.1A سواءا عن طريق الكابل أو الشحن اللاسلكي.
+        مزود بتقنية الشحن الآمن على بطارية الهاتف.
+      </p>
     </div>
   </div>
   
@@ -213,14 +241,57 @@
     <input type="text" id="clientName" name="clientName" required>
 
     <label for="phoneNumber">رقم الهاتف</label>
-    <input type="text" id="phoneNumber" name="phoneNumber" required pattern="\d{10}">
+    <input type="tel" id="phoneNumber" name="phoneNumber" required pattern="\d{10}">
 
-    <label for="city">المدينة</label>
-    <select id="city" name="city" required>
-      <option value="">اختر المدينة</option>
-      <option value="الجزائر">الجزائر</option>
-      <option value="وهران">وهران</option>
-      <option value="قسنطينة">قسنطينة</option>
+    <label for="city">الولاية</label>
+<select id="city" name="city" required>
+  <option value="">اختر الولاية</option>
+  <option value="الجزائر">الجزائر</option>
+  <option value="وهران">وهران</option>
+  <option value="قسنطينة">قسنطينة</option>
+  <!-- Add more options for other regions -->
+  <option value="البليدة">البليدة</option>
+  <option value="تلمسان">تلمسان</option>
+  <option value="عنابة">عنابة</option>
+  <option value="تيزي وزو">تيزي وزو</option>
+  <option value="الشلف">الشلف</option>
+  <option value="سطيف">سطيف</option>
+  <option value="باتنة">باتنة</option>
+  <option value="الأغواط">الأغواط</option>
+  <option value="جيجل">جيجل</option>
+  <option value="مستغانم">مستغانم</option>
+  <option value="معسكر">معسكر</option>
+  <option value="تبسة">تبسة</option>
+  <option value="المدية">المدية</option>
+  <option value="الشلف">الشلف</option>
+  <option value="غرداية">غرداية</option>
+  <option value="سكيكدة">سكيكدة</option>
+  <option value="ورقلة">ورقلة</option>
+  <option value="الوادي">الوادي</option>
+  <option value="خنشلة">خنشلة</option>
+  <option value="سعيدة">سعيدة</option>
+  <option value="البيض">البيض</option>
+  <option value="تيسمسيلت">تيسمسيلت</option>
+  <option value="برج بوعريريج">برج بوعريريج</option>
+  <option value="بجاية">بجاية</option>
+  <option value="الطارف">الطارف</option>
+  <option value="المدية">المدية</option>
+  <option value="البرج">البرج</option>
+  <option value="ميلة">ميلة</option>
+  <option value="الدرعان">الدرعان</option>
+  <option value="المنيعة">المنيعة</option>
+  <option value="الضوء">الضوء</option>
+  <option value="البرج">البرج</option>
+  <option value="البويرة">البويرة</option>
+  <option value="بلعباس">بلعباس</option>
+  <option value="تندوف">تندوف</option>
+  <option value="بومرداس">بومرداس</option>
+  <option value="المسيلة">المسيلة</option>
+  <option value="سعيدة">سعيدة</option>
+  <option value="برج منايل">برج منايل</option>
+  <option value="الراشدية">الراشدية</option>
+</select>
+
     </select>
 
     <label for="address">العنوان</label>
