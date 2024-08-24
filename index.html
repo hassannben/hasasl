@@ -8,195 +8,201 @@
   <style>
     /* إضافة CSS هنا */
     body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #f4f4f4;
-      direction: rtl;
-      text-align: right;
-    }
-    h2, h3 {
-      color: #333;
-    }
-    h1 {
-        background-color: #ddd;
-    }
-    form {
-      background-color: #fff;
-      padding: 20px;
-      border-radius: 5px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      max-width: 600px;
-      margin: 20px auto;
-    }
-    input, select, textarea {
-      display: block;
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 10px;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-      transition: border-color 0.3s ease, box-shadow 0.3s ease;
-    }
-    input[type="submit"] {
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      cursor: pointer;
-      transition: background-color 0.3s ease, transform 0.3s ease;
-    }
-    input[type="submit"]:hover {
-      background-color: #45a049;
-      transform: scale(1.05);
-    }
-    input[type="submit"]:active {
-      transform: scale(0.95);
-    }
-    input[readonly] {
-      background-color: #f9f9f9;
-      cursor: not-allowed;
-    }
-    .product-container {
-      background-color: #fff;
-      padding: 20px;
-      border-radius: 5px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      max-width: 600px;
-      margin: 20px auto;
-      text-align: center;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-    }
-    .product-container.fade-in-active {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+  direction: rtl;
+  text-align: right;
+}
+
+h2, h3 {
+  color: #333;
+}
+
+h1 {
+  background-color: #ddd;
+}
+
+form, .product-container {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  max-width: 600px;
+  margin: 20px auto;
+}
+
+input, select, textarea {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input[type="submit"] {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+input[type="submit"]:hover {
+  background-color: #45a049;
+  transform: scale(1.05);
+}
+
+input[type="submit"]:active {
+  transform: scale(0.95);
+}
+
+input[readonly] {
+  background-color: #f9f9f9;
+  cursor: not-allowed;
+}
+
+.product-container {
+  text-align: center;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.product-container.fade-in-active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.product-images {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    width: 100%;
+    height: auto;
+    position: relative;
+    padding-bottom: 75%; /* نسبة العرض إلى الارتفاع للحفاظ على النسبة */
+    background-color: #f4f4f4; /* لون الخلفية في حالة تحميل الصور ببطء */
+}
+
+.product-images img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* لضمان ملاءمة الصورة داخل الإطار بشكل جيد */
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.product-images img.active {
+    opacity: 1;
+}
+
+@media (max-width: 768px) {
     .product-images {
-      position: relative;
-      height: 500px;
-      left:  120px;
-      overflow: hidden;
+        padding-bottom: 100%; /* تعديل نسبة العرض إلى الارتفاع لتناسب الشاشات الصغيرة */
     }
-    .product-images img {
-      position: absolute;
-      height: 300px;
-    
-      opacity: 0;
-      transition: opacity 1s ease-in-out;
+}
+
+@media (max-width: 480px) {
+    .product-images {
+        padding-bottom: 150%; /* زيادة نسبة العرض إلى الارتفاع لتناسب الشاشات الأصغر */
     }
-    .product-images img.active {
-      opacity: 1;
-    }
-    input:focus, select:focus, textarea:focus {
-      border-color: #4CAF50;
-      box-shadow: 0 0 5px rgba(0, 255, 0, 0.3);
-      outline: none;
-    }
-    @media (max-width: 768px) {
-      form {
-        padding: 15px;
-      }
-      .product-container {
-        padding: 15px;
-      }
-    }
-    @media (max-width: 480px) {
-      form {
-        padding: 10px;
-      }
-      .product-container {
-        padding: 10px;
-      }
-      input, select, textarea {
-        padding: 8px;
-      }
-    }
+}
+
+
   </style>
   <script>
     // إضافة JavaScript هنا
     window.onload = function() {
-      var now = new Date();
-      var todayDate = now.toISOString().split('T')[0];
-      var time = now.toTimeString().split(' ')[0];
+  var now = new Date();
+  var todayDate = now.toISOString().split('T')[0];
+  var time = now.toTimeString().split(' ')[0];
 
-      document.getElementById('date').value = todayDate;
-      document.getElementById('time').value = time;
-      
-      document.getElementById('city').addEventListener('change', function() {
-        updateDeliveryCost();
-      });
+  document.getElementById('date').value = todayDate;
+  document.getElementById('time').value = time;
+  
+  document.getElementById('city').addEventListener('change', function() {
+    updateDeliveryCost();
+  });
 
-      document.getElementById('quantity').addEventListener('input', function() {
-        updateTotal();
-      });
+  document.getElementById('quantity').addEventListener('input', function() {
+    updateTotal();
+  });
 
-      document.getElementById('quantity').value = 1;
-      updateTotal();
+  document.getElementById('quantity').value = 1;
+  updateTotal();
 
-      document.querySelector('.product-container').classList.add('fade-in-active');
-      
-      // إعداد صور التغيير الدوري
-      var images = document.querySelectorAll('.product-images img');
-      var currentIndex = 0;
+  document.querySelector('.product-container').classList.add('fade-in-active');
+  
+  // إعداد صور التغيير الدوري
+  var images = document.querySelectorAll('.product-images img');
+  var currentIndex = 0;
 
-      function showNextImage() {
-        images[currentIndex].classList.remove('active');
-        currentIndex = (currentIndex + 1) % images.length;
-        images[currentIndex].classList.add('active');
-      }
+  function showNextImage() {
+    images[currentIndex].classList.remove('active');
+    currentIndex = (currentIndex + 1) % images.length;
+    images[currentIndex].classList.add('active');
+  }
 
-      images[currentIndex].classList.add('active');
-      setInterval(showNextImage, 3000); // تغيير الصورة كل 3 ثوانٍ
-    };
+  images[currentIndex].classList.add('active');
+  setInterval(showNextImage, 3000); // تغيير الصورة كل 3 ثوانٍ
+};
 
-    function updateDeliveryCost() {
-      var city = document.getElementById('city').value;
-      var deliveryCost = (city === 'الجزائر') ? 400 : 700;
-      document.getElementById('deliveryCost').value = deliveryCost;
+function updateDeliveryCost() {
+  var city = document.getElementById('city').value;
+  var deliveryCost = (city === 'الجزائر') ? 400 : 700;
+  document.getElementById('deliveryCost').value = deliveryCost;
 
-      updateTotal();
+  updateTotal();
+}
+
+function updateTotal() {
+  var productPrice = 1300;
+  var quantity = parseInt(document.getElementById('quantity').value) || 0;
+  var deliveryCost = parseFloat(document.getElementById('deliveryCost').value) || 0;
+  var total = (productPrice * quantity) + deliveryCost;
+  document.getElementById('total').value = total;
+}
+
+function handleSubmit(event) {
+  event.preventDefault();
+
+  var form = event.target;
+  var formData = new FormData(form);
+  formData.append('time', document.getElementById('time').value);
+
+  fetch(form.action, {
+    method: 'POST',
+    body: new URLSearchParams(formData).toString(),
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
     }
-
-    function updateTotal() {
-      var productPrice = 1300;
-      var quantity = parseInt(document.getElementById('quantity').value) || 0;
-      var deliveryCost = parseFloat(document.getElementById('deliveryCost').value) || 0;
-      var total = (productPrice * quantity) + deliveryCost;
-      document.getElementById('total').value = total;
+  })
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
     }
+    return response.text();
+  })
+  .then(data => {
+    console.log('البيانات المستلمة:', data);
+    alert("تم إرسال البيانات بنجاح!");
+    form.reset();
+    window.onload();
+  })
+  .catch(error => {
+    console.error('خطأ:', error);
+    alert("حدث خطأ أثناء إرسال البيانات. يرجى المحاولة مرة أخرى.");
+  });
+}
 
-    function handleSubmit(event) {
-      event.preventDefault();
-
-      var form = event.target;
-      var formData = new FormData(form);
-      formData.append('time', document.getElementById('time').value);
-
-      fetch(form.action, {
-        method: 'POST',
-        body: new URLSearchParams(formData).toString(),
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
-        }
-      })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.text();
-      })
-      .then(data => {
-        console.log('البيانات المستلمة:', data);
-        alert("تم إرسال البيانات بنجاح!");
-        form.reset();
-        window.onload();
-      })
-      .catch(error => {
-        console.error('خطأ:', error);
-        alert("حدث خطأ أثناء إرسال البيانات. يرجى المحاولة مرة أخرى.");
-      });
-    }
   </script>
   <meta property="og:title" content="عرض خاص - شراء الآن">
   <meta property="og:description" content="استفد من العرض الخاص الآن! احصل على المنتج الذي تريده بسعر مميز وتوصيل سريع.">
